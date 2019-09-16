@@ -1,0 +1,62 @@
+#include <Servo.h>
+
+Servo servoLeft;          // Define left servo
+Servo servoRight;         // Define right servo
+  int trans1 = A0; //connected to 14
+  int trans2 = A1; // connected to 15
+void setup() 
+{ 
+
+   Serial.begin(9600);
+
+  pinMode(trans1, INPUT);
+  pinMode(trans2, INPUT);
+  servoLeft.attach(10);  // Set left servo to digital pin 10
+  servoRight.attach(9);  // Set right servo to digital pin 9
+
+  servoLeft.write(90);
+  servoRight.write(0);
+  
+} 
+
+void transition1() 
+{
+  servoLeft.write(0);
+  servoRight.write(90);
+}
+
+void transition2() 
+{
+  servoLeft.write(90);
+  servoRight.write(0);
+}
+
+void loop()
+{ 
+
+int buttonState1 = analogRead(trans1);
+int buttonState2 = analogRead(trans2);
+
+if(buttonState1>=800)
+{
+  transition1();
+  Serial.println("transition 1 is done ");
+  delay(2000);
+  
+}
+
+ else if(buttonState2>=800)
+ {
+   transition2();
+    Serial.println("transition 2 is done "); 
+  delay(2000); 
+ }
+  else
+  {
+    Serial.println("NO input BC ");
+    }
+    
+}
+
+
+
