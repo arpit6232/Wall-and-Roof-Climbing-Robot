@@ -1,0 +1,522 @@
+#include <Psx.h>                                          // Includes the Psx Library 
+                                                          // Any pins can be used since it is done in software
+#define dataPin 12//brown8
+#define cmndPin 11//orange9
+#define clockPin 13//blue10
+#define attPin 10//yellow11
+
+
+#define LEDPin 13
+ 
+Psx Psx;     
+
+unsigned int data = 0;         
+
+//int roof_pump=40;
+
+//int wall_pump=42;
+
+
+void setup() 
+{
+  Serial.begin(2400);
+  Psx.setupPins(dataPin, cmndPin, attPin, clockPin, 10);  // Defines what each pin is used
+                                                          // (Data Pin #, Cmnd Pin #, Att Pin #, Clk Pin #, Delay)
+}
+
+ /* pinMode(roof_pump,OUTPUT);
+  pinMode(wall_pump,OUTPUT);  
+
+  pinMode(14,OUTPUT);
+  pinMode(15,OUTPUT);
+                                                       
+  pinMode(24,OUTPUT);
+  pinMode(25,OUTPUT);
+  pinMode(26,OUTPUT);
+  pinMode(27,OUTPUT);
+  pinMode(28,OUTPUT);
+  pinMode(29,OUTPUT);
+  
+  pinMode(30,OUTPUT);
+  pinMode(31,OUTPUT);
+  pinMode(32,OUTPUT);
+  pinMode(33,OUTPUT);
+  pinMode(34,OUTPUT);
+  pinMode(35,OUTPUT);
+  pinMode(36,OUTPUT);
+
+   pinMode(4,OUTPUT);
+  pinMode(5,OUTPUT);
+  pinMode(6,OUTPUT);
+  pinMode(7,OUTPUT);
+
+  digitalWrite(roof_pump,HIGH);
+   digitalWrite(wall_pump,HIGH);
+     digitalWrite(14,LOW);
+       digitalWrite(15,LOW);
+  
+  
+}
+
+void roof_on()
+  {
+  digitalWrite(roof_pump,LOW);
+    digitalWrite(4,200);
+  digitalWrite(25,HIGH);
+  digitalWrite(26,HIGH);
+
+  digitalWrite(5,200);
+  digitalWrite(28,HIGH);
+  digitalWrite(29,HIGH);
+
+  digitalWrite(6,200);
+  digitalWrite(31,HIGH);
+  digitalWrite(32,HIGH);
+
+  digitalWrite(7,200);
+  digitalWrite(34,HIGH);
+  digitalWrite(35,HIGH);
+
+  }
+  
+ void wall_on()
+  {
+    
+  digitalWrite(wall_pump,LOW);
+    digitalWrite(4,200);
+  digitalWrite(25,HIGH);
+  digitalWrite(26,HIGH);
+
+  digitalWrite(5,200);
+  digitalWrite(28,HIGH);
+  digitalWrite(29,HIGH);
+
+  digitalWrite(6,200);
+  digitalWrite(31,HIGH);
+  digitalWrite(32,HIGH);
+
+  digitalWrite(7,200);
+  digitalWrite(34,HIGH);
+  digitalWrite(35,HIGH);
+
+  }
+  
+void roof_off()
+  {
+  digitalWrite(roof_pump,HIGH);
+  }
+  
+void wall_off()
+  {
+  digitalWrite(wall_pump,HIGH);
+  }
+
+
+ void forward()
+ {
+  analogWrite(4,200);
+  digitalWrite(25,HIGH);
+  digitalWrite(26,LOW);
+
+  analogWrite(5,200);
+  digitalWrite(28,HIGH);
+  digitalWrite(29,LOW);
+
+  analogWrite(6,200);
+  digitalWrite(31,HIGH);
+  digitalWrite(32,LOW);
+
+  analogWrite(7,200);
+  digitalWrite(34,HIGH);
+  digitalWrite(35,LOW);
+  
+  }
+  
+   void backward()
+ {
+  analogWrite(4,200);
+  digitalWrite(25,LOW);
+  digitalWrite(26,HIGH);
+
+  analogWrite(5,200);
+  digitalWrite(28,LOW);
+  digitalWrite(29,HIGH);
+
+  analogWrite(6,200);
+  digitalWrite(31,LOW);
+  digitalWrite(32,HIGH);
+
+  analogWrite(7,200);
+  digitalWrite(34,LOW);
+  digitalWrite(35,HIGH);
+  
+  }
+
+  
+   void right()
+ {
+  analogWrite(4,200);
+  digitalWrite(25,HIGH);
+  digitalWrite(26,LOW);
+
+  analogWrite(5,200);
+  digitalWrite(28,HIGH);
+  digitalWrite(29,LOW);
+
+  analogWrite(6,200);
+  digitalWrite(31,LOW);
+  digitalWrite(32,HIGH);
+
+  analogWrite(7,200);
+  digitalWrite(34,LOW);
+  digitalWrite(35,HIGH);
+  
+  }
+
+  
+   void left()
+ {
+  analogWrite(4,200);
+  digitalWrite(25,LOW);
+  digitalWrite(26,HIGH);
+
+  analogWrite(5,200);
+  digitalWrite(28,LOW);
+  digitalWrite(29,HIGH);
+
+  analogWrite(6,200);
+  digitalWrite(31,HIGH);
+  digitalWrite(32,LOW);
+
+  analogWrite(7,200);
+  digitalWrite(34,HIGH);
+  digitalWrite(35,LOW);
+  
+  }
+
+     void stop1()
+ {
+  digitalWrite(4,200);
+  digitalWrite(25,HIGH);
+  digitalWrite(26,HIGH);
+
+  digitalWrite(5,200);
+  digitalWrite(28,HIGH);
+  digitalWrite(29,HIGH);
+
+  digitalWrite(6,200);
+  digitalWrite(31,HIGH);
+  digitalWrite(32,HIGH);
+
+  digitalWrite(7,200);
+  digitalWrite(34,HIGH);
+  digitalWrite(35,HIGH);
+digitalWrite(roof_pump,HIGH);
+digitalWrite(wall_pump,HIGH);
+
+   digitalWrite(14,LOW);
+       digitalWrite(15,LOW);
+  //wall_off();
+  // roof_off();
+  
+  }
+
+void roof_forward()
+ {
+digitalWrite(roof_pump,LOW);
+  analogWrite(4,200);
+  digitalWrite(25,HIGH);
+  digitalWrite(26,LOW);
+
+  analogWrite(5,200);
+  digitalWrite(28,HIGH);
+  digitalWrite(29,LOW);
+
+  analogWrite(6,200);
+  digitalWrite(31,HIGH);
+  digitalWrite(32,LOW);
+
+  analogWrite(7,200);
+  digitalWrite(34,HIGH);
+  digitalWrite(35,LOW);
+  
+  }
+  
+   void roof_backward()
+ {
+digitalWrite(roof_pump,LOW);
+  analogWrite(4,200);
+  digitalWrite(25,LOW);
+  digitalWrite(26,HIGH);
+
+  analogWrite(5,200);
+  digitalWrite(28,LOW);
+  digitalWrite(29,HIGH);
+
+  analogWrite(6,200);
+  digitalWrite(31,LOW);
+  digitalWrite(32,HIGH);
+
+  analogWrite(7,200);
+  digitalWrite(34,LOW);
+  digitalWrite(35,HIGH);
+  
+  }
+
+  
+   void roof_right()
+ {
+ digitalWrite(roof_pump,LOW);
+  analogWrite(4,200);
+  digitalWrite(25,HIGH);
+  digitalWrite(26,LOW);
+
+  analogWrite(5,200);
+  digitalWrite(28,HIGH);
+  digitalWrite(29,LOW);
+
+  analogWrite(6,200);
+  digitalWrite(31,LOW);
+  digitalWrite(32,HIGH);
+
+  analogWrite(7,200);
+  digitalWrite(34,LOW);
+  digitalWrite(35,HIGH);
+  
+  }
+
+  
+   void roof_left()
+ {
+ digitalWrite(roof_pump,LOW);
+  analogWrite(4,200);
+  digitalWrite(25,LOW);
+  digitalWrite(26,HIGH);
+
+  analogWrite(5,200);
+  digitalWrite(28,LOW);
+  digitalWrite(29,HIGH);
+
+  analogWrite(6,200);
+  digitalWrite(31,HIGH);
+  digitalWrite(32,LOW);
+
+  analogWrite(7,200);
+  digitalWrite(34,HIGH);
+  digitalWrite(35,LOW);
+  
+  }
+
+void wall_forward()
+ {
+  digitalWrite(wall_pump,LOW);
+  analogWrite(4,200);
+  digitalWrite(25,HIGH);
+  digitalWrite(26,LOW);
+
+  analogWrite(5,200);
+  digitalWrite(28,HIGH);
+  digitalWrite(29,LOW);
+
+  analogWrite(6,200);
+  digitalWrite(31,HIGH);
+  digitalWrite(32,LOW);
+
+  analogWrite(7,200);
+  digitalWrite(34,HIGH);
+  digitalWrite(35,LOW);
+  
+  }
+  
+   void wall_backward()
+ {
+    digitalWrite(wall_pump,LOW);
+  analogWrite(4,200);
+  digitalWrite(25,LOW);
+  digitalWrite(26,HIGH);
+
+  analogWrite(5,200);
+  digitalWrite(28,LOW);
+  digitalWrite(29,HIGH);
+
+  analogWrite(6,200);
+  digitalWrite(31,LOW);
+  digitalWrite(32,HIGH);
+
+  analogWrite(7,200);
+  digitalWrite(34,LOW);
+  digitalWrite(35,HIGH);
+  
+  }
+
+  
+   void wall_right()
+ {
+    digitalWrite(wall_pump,LOW);
+  analogWrite(4,200);
+  digitalWrite(25,HIGH);
+  digitalWrite(26,LOW);
+
+  analogWrite(5,200);
+  digitalWrite(28,HIGH);
+  digitalWrite(29,LOW);
+
+  analogWrite(6,200);
+  digitalWrite(31,LOW);
+  digitalWrite(32,HIGH);
+
+  analogWrite(7,200);
+  digitalWrite(34,LOW);
+  digitalWrite(35,HIGH);
+  
+  }
+
+  
+   void wall_left()
+ {
+    digitalWrite(wall_pump,LOW);
+  analogWrite(4,200);
+  digitalWrite(25,LOW);
+  digitalWrite(26,HIGH);
+
+  analogWrite(5,200);
+  digitalWrite(28,LOW);
+  digitalWrite(29,HIGH);
+
+  analogWrite(6,200);
+  digitalWrite(31,HIGH);
+  digitalWrite(32,LOW);
+
+  analogWrite(7,200);
+  digitalWrite(34,HIGH);
+  digitalWrite(35,LOW);
+  
+  }
+
+ void trans1()
+ {
+digitalWrite(wall_pump,LOW);
+digitalWrite(14,HIGH);
+delay(200);
+  
+  }
+
+
+ void trans2()
+ {
+digitalWrite(roof_pump,LOW);
+ digitalWrite(15,HIGH);
+delay(200);
+  
+  }
+  */
+  void loop()
+{
+  data = Psx.read();                                      // Psx.read() initiates the PSX controller and returns
+                                                          // the button data
+  Serial.println(data);                                   // Display the returned numeric value
+
+  switch (data)
+  {
+     case 2048:    
+      Serial.println("forward");
+     //forward();
+      break;
+
+      /*case 512:    
+      Serial.println("backward");
+     backward();
+      break;
+
+     case  1024:    
+      Serial.println("right");
+    right();
+      break;
+      
+     case 256:   
+      Serial.println("left");
+    left();
+     
+      break;
+
+        case 10240:   
+      Serial.println("wall_forward");
+       wall_forward();
+      break;
+
+       case 8704:   
+      Serial.println("wall_backward");
+       wall_backward();
+      break;
+
+       case 9216:   
+      Serial.println("wall_right");
+     wall_right();
+      break;
+
+       case 8448:   
+      Serial.println("wall_left");
+      wall_left();
+      break;
+
+
+      
+        case 6144:   
+      Serial.println("roof_forward");
+      roof_forward();
+      break;
+
+       case 4608:   
+      Serial.println("roof_backward");
+       roof_backward();
+      break;
+
+       case 5200:   
+      Serial.println("roof_right");
+      roof_right();
+      break;
+
+       case 4352:   
+      Serial.println("roof_left");
+      roof_left();
+      break;
+
+           case 4096:   
+      Serial.println("roof_on");
+      roof_on();
+      break;
+
+           case 8192:   
+      Serial.println("wall_on");
+      wall_on();
+      break;
+
+        case 12288:   
+      Serial.println("both_pump_on");
+      wall_on();
+      roof_on();
+      break;
+      
+      
+      case 0:   
+      Serial.println("stop");
+     stop1();
+      break;
+
+        case 40960:   
+      Serial.println("transition1");
+       trans1();
+      break;
+
+        case 20480:   
+      Serial.println("transition 2");
+     trans2();
+      break;
+      */
+      
+  }
+  
+}
+
+
+
